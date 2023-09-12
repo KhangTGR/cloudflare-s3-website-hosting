@@ -1,8 +1,6 @@
-Static Website Example
+Connecting CloudFlare to S3 Bucket
 ----------------------
-
-To be used with Cloud Academy labs.
-
+![](diagram/diagram.png)
 
 License
 ----------------------
@@ -19,3 +17,4 @@ All of the site templates I create for [HTML5 UP](https://html5up.net/) are lice
 ... all for free, yo. In exchange, just give HTML5 UP credit for the design and tell your friends about it :)
 
 More info [here](https://html5up.net/license).
+
