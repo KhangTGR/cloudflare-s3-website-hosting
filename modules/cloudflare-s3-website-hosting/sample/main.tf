@@ -2,11 +2,8 @@ module "cloudflare-s3-website-hosting" {
   source = "./modules/cloudflare-s3-website-hosting"
 
   # Required variables
-  bucket_name = "blog-test.khangtgr.com"
-  region      = "ap-southeast-1"
-
-  # Optional variables
-  prefix      = "pynamo"
+  bucket_name = "Your bucket name"
+  region      = "Your chosen region"
 }
 
 output "website_url" {
