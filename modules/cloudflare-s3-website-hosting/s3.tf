@@ -1,17 +1,11 @@
-# Define an S3 bucket for the static website files.
-resource "aws_s3_bucket" "static-website" {
+resource "aws_s3_bucket" "static_website_bucket" {
   bucket        = var.bucket_name
   force_destroy = true
-  tags = {
-    Name = "static-website"
-  }
 }
 
-# Configure the static website properties of the S3 bucket.
-resource "aws_s3_bucket_website_configuration" "static-website" {
-  bucket = aws_s3_bucket.static-website.id
+resource "aws_s3_bucket_website_configuration" "static_website_configuration" {
+  bucket = aws_s3_bucket.static_website_bucket.id
 
-  # Specify the index and error documents for the static website.
   index_document {
     suffix = var.index_document
   }
@@ -21,25 +15,22 @@ resource "aws_s3_bucket_website_configuration" "static-website" {
   }
 }
 
-# Enable versioning for the S3 bucket to track object versions.
-resource "aws_s3_bucket_versioning" "static-website" {
-  bucket = aws_s3_bucket.static-website.id
+resource "aws_s3_bucket_versioning" "static_website_versioning" {
+  bucket = aws_s3_bucket.static_website_bucket.id
   versioning_configuration {
     status = var.versioning_status
   }
 }
 
-# Configure ownership controls for the S3 bucket.
-resource "aws_s3_bucket_ownership_controls" "static-website" {
-  bucket = aws_s3_bucket.static-website.id
+resource "aws_s3_bucket_ownership_controls" "static_website_ownership_controls" {
+  bucket = aws_s3_bucket.static_website_bucket.id
   rule {
     object_ownership = var.object_ownership_rule
   }
 }
 
-# Configure public access block settings for the S3 bucket.
-resource "aws_s3_bucket_public_access_block" "static-website" {
-  bucket = aws_s3_bucket.static-website.id
+resource "aws_s3_bucket_public_access_block" "static_website_public_access_block" {
+  bucket = aws_s3_bucket.static_website_bucket.id
 
   block_public_acls       = var.block_public_acls_status
   block_public_policy     = var.block_public_policy_status
@@ -47,13 +38,12 @@ resource "aws_s3_bucket_public_access_block" "static-website" {
   restrict_public_buckets = var.restrict_public_buckets_status
 }
 
-# Configure the S3 bucket access control list (ACL).
-resource "aws_s3_bucket_acl" "static-website" {
+resource "aws_s3_bucket_acl" "static_website_bucket_acl" {
   depends_on = [
-    aws_s3_bucket_ownership_controls.static-website,
-    aws_s3_bucket_public_access_block.static-website,
+    aws_s3_bucket_ownership_controls.static_website_ownership_controls,
+    aws_s3_bucket_public_access_block.static_website_public_access_block,
   ]
 
-  bucket = aws_s3_bucket.static-website.id
+  bucket = aws_s3_bucket.static_website_bucket.id
   acl    = var.bucket_acl_status
 }

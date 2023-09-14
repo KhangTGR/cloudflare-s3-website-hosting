@@ -1,4 +1,15 @@
-# =================================
+# ==================================
+#   Project general Configuration
+# ==================================
+variable "prefix" {
+  description = "A prefix to be added to resource names."
+  type        = string
+  default     = ""
+}
+
+
+
+# ==================================
 #   AWS Credentials Configuration
 # ==================================
 variable "profile" {
@@ -103,4 +114,28 @@ variable "lambda_function_role_policy_name" {
   description = "Name of the IAM policy attached to the Lambda function's role"
   type        = string
   default     = "UpdateCloudFlareIPsToS3Policy-Role-Policy"
+}
+
+variable "lambda_trigger_event_name" {
+  type        = string
+  default     = "LambdaScheduledRule"
+  description = "Name for the CloudWatch Event Rule that triggers the Lambda function."
+}
+
+variable "lambda_trigger_event_description" {
+  type        = string
+  default     = "lambda_trigger_event_description"
+  description = "Description for the CloudWatch Event Rule that triggers the Lambda function."
+}
+
+variable "lambda_trigger_event_schedule_expression" {
+  type        = string
+  default     = "rate(30 days)"
+  description = "Schedule expression for the CloudWatch Event Rule that determines when the Lambda function is triggered."
+}
+
+variable "eventbridge_lambda_permission_statement_id" {
+  type        = string
+  default     = "AllowExecutionFromEventBridge"
+  description = "Statement ID for the Lambda function permission to be used with EventBridge."
 }

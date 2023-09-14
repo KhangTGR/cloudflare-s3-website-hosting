@@ -1,8 +1,6 @@
-# Define an IAM role for the Lambda function.
-resource "aws_iam_role" "lambda_role" {
-  name = var.lambda_function_role
+resource "aws_iam_role" "lambda_execution_role" {
+  name = var.prefix != "" ? "${var.prefix}-${var.lambda_function_role}" : var.lambda_function_role
 
-  # Define the permissions policy for assuming the Lambda role.
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -19,13 +17,11 @@ resource "aws_iam_role" "lambda_role" {
 EOF
 }
 
-# Define an IAM policy for the Lambda function.
-resource "aws_iam_policy" "lambda_policy" {
-  name        = var.lambda_function_role_policy_name
+resource "aws_iam_policy" "lambda_function_policy" {
+  name        = var.prefix != "" ? "${var.prefix}-${var.lambda_function_role_policy_name}" : var.lambda_function_role_policy_name
   path        = "/"
   description = "Basic IAM Policy for Lambda"
 
-  # Define the permissions policy for the Lambda function.
   policy = <<EOF
 {
     "Statement": [
@@ -55,8 +51,7 @@ resource "aws_iam_policy" "lambda_policy" {
 EOF
 }
 
-# Attach the IAM policy to the IAM role.
-resource "aws_iam_role_policy_attachment" "policy_role_attachment" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.lambda_policy.arn
+resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+  role       = aws_iam_role.lambda_execution_role.name
+  policy_arn = aws_iam_policy.lambda_function_policy.arn
 }
