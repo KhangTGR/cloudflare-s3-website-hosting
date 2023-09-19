@@ -42,7 +42,7 @@ resource "aws_iam_policy" "lambda_function_policy" {
                 "s3:PutBucketPolicy"
             ],
             "Resource": [
-                "arn:aws:s3:::${var.bucket_name}"
+                "arn:aws:s3:::${local.bucket_name}"
             ]
         }
     ],

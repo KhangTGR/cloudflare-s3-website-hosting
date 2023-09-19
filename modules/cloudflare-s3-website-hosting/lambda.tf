@@ -9,7 +9,7 @@ resource "aws_lambda_function" "update_s3_bucket_policy" {
 
   environment {
     variables = {
-      BUCKET_NAME = var.bucket_name
+      BUCKET_NAME = local.bucket_name
     }
   }
 }
