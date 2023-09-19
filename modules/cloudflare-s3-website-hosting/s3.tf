@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "static_website_bucket" {
-  bucket        = var.bucket_name
+  bucket        = local.bucket_name
   force_destroy = true
 }
 

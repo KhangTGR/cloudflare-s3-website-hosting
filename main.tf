@@ -2,20 +2,11 @@ module "cloudflare-s3-website-hosting" {
   source = "./modules/cloudflare-s3-website-hosting"
 
   # Required variables
-  bucket_name = "blog-test.khangtgr.com"
-  region      = "ap-southeast-1"
+  domain               = var.domain
+  subdomain            = var.subdomain
+  cloudflare_api_token = var.cloudflare_api_token
+  region               = var.region
 
   # Optional variables
-  prefix      = "pynamo"
-}
-
-output "website_url" {
-  description = "The URL of the hosted static website in Amazon S3."
-  value       = module.cloudflare-s3-website-hosting.website_url
-}
-
-# ============ MUST HAVE ============
-output "bucket_name" {
-  description = "The name of the bucket"
-  value       = module.cloudflare-s3-website-hosting.bucket_name
+  prefix = var.prefix
 }
