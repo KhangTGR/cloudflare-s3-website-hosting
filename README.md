@@ -30,7 +30,7 @@ Before starting, ensure you have the following prerequisites installed and confi
 
 - **Source code**: Place your static website source code in the `/source` folder, where it will be deployed to the S3 bucket. Ensure the 'index document' in the S3 configuration matches your source code. You can customize the path to the index.html file using the 'index_document' variable.
 
-- **Creating `terraform.tfvars`**: Instead of customizing `main.tf`, create a `terraform.tfvars` file in the root directory with the following content:
+- **Creating `terraform.tfvars`**: Instead of customizing `main.tf`, create a `terraform.tfvars` file in the `/terraform` directory with the following content:
 
 ```hcl
 # Required variables

@@ -5,6 +5,7 @@
 
 echo "Destroying Terraform-managed resources..."
 
+cd ../terraform
 # Retrieve the S3 bucket name from Terraform output
 bucket_name=$(terraform output -raw bucket_name)
 

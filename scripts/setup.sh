@@ -5,6 +5,7 @@
 
 # Main script
 echo "Initializing and applying Terraform configuration..."
+cd ../terraform
 terraform init
 terraform apply -auto-approve
 
@@ -18,7 +19,7 @@ if [ -z "$bucket_name" ]; then
 fi
 
 # Sync the current directory with the specified S3 bucket
-cd source
+cd ../source
 echo "Syncing the source code directory with the S3 bucket: $bucket_name"
 aws s3 sync . "s3://$bucket_name" --delete
 
