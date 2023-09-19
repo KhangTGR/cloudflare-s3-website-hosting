@@ -2,7 +2,7 @@
 
 # Connecting CloudFlare to S3 Bucket
 
-![Architecture Diagram](diagram/diagram.png)
+![Architecture Diagram](images/diagram.png)
 
 ## **Purpose**
 
